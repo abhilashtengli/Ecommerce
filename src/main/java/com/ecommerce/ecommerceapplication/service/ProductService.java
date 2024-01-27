@@ -15,4 +15,8 @@ public interface ProductService {
 
     void updateProduct(int productId, int quantity);
 
+    Product updateProductDetails(int id, Product prod) throws ProductNotFoundException;
+
+    int getProductQuantity(int id);
+
 }

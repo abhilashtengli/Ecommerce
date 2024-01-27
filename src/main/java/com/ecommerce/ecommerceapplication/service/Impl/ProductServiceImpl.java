@@ -27,11 +27,9 @@ public class ProductServiceImpl implements ProductService {
     public Product getProduct(String productName) throws ProductNotFoundException {
 
         Optional<Product> p = productRepo.findByProductName(productName);
-
         if (!p.isPresent()) {
             throw new ProductNotFoundException("Product not found");
         }
-
         return p.get();
     }
 
@@ -46,13 +44,36 @@ public class ProductServiceImpl implements ProductService {
 
         Product pd = productRepo.findById(productId).get();
         int totalQuantity = pd.getQuantity();
-
         if (totalQuantity != 0) {
             int revisedQuantity = totalQuantity - quantity;
-
             pd.setQuantity(revisedQuantity);
         }
 
+    }
+
+    @Override
+    public Product updateProductDetails(int id, Product prod) throws ProductNotFoundException {
+
+        Optional<Product> pd = productRepo.findById(id);
+        Product product = pd.get();
+        if (pd.isPresent()) {
+            product = Product.builder()
+                    .productName(prod.getProductName())
+                    .description(prod.getDescription())
+                    .price(prod.getPrice())
+                    .imageUrl(prod.getImageUrl())
+                    .quantity(prod.getQuantity()).build();
+
+        } else {
+            throw new ProductNotFoundException("Product not found");
+        }
+        return product;
+    }
+
+    @Override
+    public int getProductQuantity(int id) {
+        int quantity = productRepo.findById(id).get().getQuantity();
+        return quantity;
     }
 
 }

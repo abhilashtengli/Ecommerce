@@ -26,11 +26,9 @@ public class OrderItemController {
 
     @PostMapping("/save")
     public ResponseEntity<OrderItemDto> saveOrderItem(@Valid @RequestBody OrderItemDto orderItem) {
-
         OrderItem oItem = orderItemMapper.saveOrderItem(orderItem);
         OrderItem od = orderItemService.saveOrderItemToDb(oItem);
         OrderItemDto orderItemDto = orderItemMapper.convertoDto(od);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(orderItemDto);
 
     }

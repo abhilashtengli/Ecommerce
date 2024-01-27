@@ -18,14 +18,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveNewUser(User newUser) {
-
         return userRepo.save(newUser);
 
     }
 
     @Override
     public User getById(Integer id) throws UserNotFoundException {
-
         return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
 
@@ -33,13 +31,11 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user, int id) throws UserNotFoundException {
 
         Optional<User> userdb = userRepo.findById(id);
-
         if (userdb.isPresent()) {
             userRepo.save(user);
         } else {
             throw new UserNotFoundException("User not found with id: " + id);
         }
-
         return user;
 
     }

@@ -21,26 +21,20 @@ public class OrderMapperImpl implements OrderMapper {
 
     @Override
     public Order placeOrder(@Valid OrderDto orderDto) {
-
         Order order = new Order();
-
         order.setCreatedDate(LocalDate.now());
         User u = userRepo.findById(orderDto.getUser()).get();
         order.setUser(u);
-
         return order;
     }
 
     @Override
     public OrderDto converToDto(Order orderSaved) {
-
         OrderDto orderDto = new OrderDto();
-
         orderDto.setId(orderSaved.getId());
         orderDto.setOrderDate(orderSaved.getCreatedDate());
         orderDto.setTotalAmount(orderSaved.getTotalAmount());
         orderDto.setUser(orderSaved.getUser().getId());
-
         return orderDto;
     }
 

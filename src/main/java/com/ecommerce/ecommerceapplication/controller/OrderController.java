@@ -27,11 +27,9 @@ public class OrderController {
 
     @PostMapping("/save")
     public ResponseEntity<OrderDto> placeOrder(@Valid @RequestBody OrderDto orderDto) {
-
         Order od = orderMapper.placeOrder(orderDto);
         Order orderSaved = orderService.placeOrder(od);
         OrderDto oDto = orderMapper.converToDto(orderSaved);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(oDto);
     }
 }

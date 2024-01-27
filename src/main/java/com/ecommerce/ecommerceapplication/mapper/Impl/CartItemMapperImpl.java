@@ -24,31 +24,34 @@ public class CartItemMapperImpl implements CartItemMapper {
 
     @Override
     public CartItem saveCartItem(CartItemDto cartItemDto) {
-
         CartItem cartItem = new CartItem();
-
         Product prod = productRepo.findById(cartItemDto.getProductId()).get();
         User user = userRepo.findById(cartItemDto.getUserId()).get();
         cartItem.setProduct(prod);
         cartItem.setUser(user);
         cartItem.setCreatedDate(LocalDate.now());
         cartItem.setQuantity(cartItemDto.getQuantity());
-
         return cartItem;
     }
 
     @Override
     public CartItemDto converToDto(CartItem savedcartItem) {
-
         CartItemDto cartItemDto = new CartItemDto();
-
         cartItemDto.setId(savedcartItem.getId());
         cartItemDto.setProductId(savedcartItem.getProduct().getId());
         cartItemDto.setQuantity(savedcartItem.getQuantity());
         cartItemDto.setCreatedDate(savedcartItem.getCreatedDate());
         cartItemDto.setUserId(savedcartItem.getUser().getId());
-
         return cartItemDto;
+    }
+
+    @Override
+    public CartItem updateCartItem(CartItemDto cartItemdto) {
+        CartItem cart = new CartItem();
+        cart.setQuantity(cartItemdto.getQuantity());
+        Product prod = productRepo.findById(cartItemdto.getProductId()).get();
+        cart.setProduct(prod);
+        return cart;
     }
 
 }

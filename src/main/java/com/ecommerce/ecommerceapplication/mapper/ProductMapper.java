@@ -14,5 +14,7 @@ public interface ProductMapper {
 
     List<ProductDto> getAllProductDto(List<Product> prodList);
 
+    Product updateProduct( ProductDto productDto);
+
     
 }

@@ -44,12 +44,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order placeOrder(Order od) {
+
         int userId = od.getUser().getId();
-
         List<CartItem> cartItems = cartItemRepo.findByUserId(userId);
-
         Order order = new Order();
-
         order.setCreatedDate(LocalDate.now());
         User user = userRepo.findById(userId).get();
         order.setUser(user);
@@ -62,14 +60,13 @@ public class OrderServiceImpl implements OrderService {
             totalPriceAmount.addAndGet(pd.getPrice() * itemQuantity);
             productService.updateProduct(proId, itemQuantity);
         });
+
         int price = totalPriceAmount.get();
         order.setTotalAmount(price);
-
         orderRepo.save(order);
 
         for (CartItem cartItem : cartItems) {
             OrderItem orderItem = new OrderItem();
-
             orderItem.setCreatedDate(cartItem.getCreatedDate());
             orderItem.setProduct(cartItem.getProduct());
             orderItem.setQuantity(cartItem.getQuantity());
@@ -77,7 +74,6 @@ public class OrderServiceImpl implements OrderService {
             int proId = cartItem.getProduct().getId();
             Product pd = productRepo.findById(proId).get();
             orderItem.setPrice(pd.getPrice() * cartItem.getQuantity());
-
             orderItemRepo.save(orderItem);
         }
         cartItemRepo.deleteByUser_Id(userId);

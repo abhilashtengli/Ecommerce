@@ -12,5 +12,7 @@ public interface CategoryMapper {
     CategoryDto convertoDto(Category savedCategory);
 
     List<CategoryDto> convertoDtoList(List<Category> c);
+
+    Category updateCategory(int id, CategoryDto cDto);
     
 }

@@ -22,9 +22,7 @@ public class ProductMapperImpl implements ProductMapper {
 
     @Override
     public Product saveProduct(ProductDto product) throws CategoryIdNotFoundException {
-
         Product newProduct = new Product();
-
         newProduct.setProductName(product.getProductName());
         newProduct.setDescription(product.getDescription());
         newProduct.setPrice(product.getPrice());
@@ -44,9 +42,7 @@ public class ProductMapperImpl implements ProductMapper {
 
     @Override
     public ProductDto savedProductDto(Product savedProduct) {
-
         ProductDto saveProductDto = new ProductDto();
-
         saveProductDto.setId(savedProduct.getId());
         saveProductDto.setDescription(savedProduct.getDescription());
         saveProductDto.setPrice(savedProduct.getPrice());
@@ -59,7 +55,6 @@ public class ProductMapperImpl implements ProductMapper {
         List<Category> list = new ArrayList<>();
         list.add(c);
         saveProductDto.setCategories(list);
-
         return saveProductDto;
     }
 
@@ -67,13 +62,24 @@ public class ProductMapperImpl implements ProductMapper {
     public List<ProductDto> getAllProductDto(List<Product> prodList) {
 
         List<ProductDto> list = new ArrayList<>();
-
         prodList.forEach(product -> {
             ProductDto productDto = savedProductDto(product);
             list.add(productDto);
         });
-
         return list;
+    }
+
+    @Override
+    public Product updateProduct(ProductDto productDto) {
+
+        Product product = Product.builder()
+                .productName(productDto.getProductName())
+                .description(productDto.getDescription())
+                .price(productDto.getPrice())
+                .imageUrl(productDto.getImageUrl())
+                .quantity(productDto.getQuantity()).build();
+
+        return product;
     }
 
 }

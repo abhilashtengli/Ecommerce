@@ -15,7 +15,6 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItem saveOrderItemToDb(OrderItem oItem) {
-
         return orderItemRepo.save(oItem);
     }
 

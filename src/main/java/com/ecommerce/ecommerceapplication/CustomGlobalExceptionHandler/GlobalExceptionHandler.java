@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.ecommerce.ecommerceapplication.exceptionClass.CategoryIdNotFoundException;
+import com.ecommerce.ecommerceapplication.exceptionClass.PoductNotAvailableException;
 import com.ecommerce.ecommerceapplication.exceptionClass.ProductNotFoundException;
 import com.ecommerce.ecommerceapplication.exceptionClass.UserNotFoundException;
 
@@ -20,7 +21,6 @@ public class GlobalExceptionHandler {
         HashMap<String, String> map = new HashMap<>();
         map.put("Message", user.getMessage());
         map.put("StatusCode", HttpStatus.NOT_FOUND.toString());
-
         return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
     }
 
@@ -29,15 +29,21 @@ public class GlobalExceptionHandler {
         HashMap<String, String> map = new HashMap<>();
         map.put("Message", product.getMessage());
         map.put("StatusCode", HttpStatus.NOT_FOUND.toString());
-
         return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(CategoryIdNotFoundException.class)
     public ResponseEntity<Map<String, String>> CategoryIdNotFoundException(CategoryIdNotFoundException product) {
         HashMap<String, String> map = new HashMap<>();
         map.put("Message", product.getMessage());
         map.put("StatusCode", HttpStatus.NOT_FOUND.toString());
-
         return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(PoductNotAvailableException.class)
+    public ResponseEntity<Map<String, String>> PoductNotAvailableException(PoductNotAvailableException product) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Message", product.getMessage());
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }

@@ -26,9 +26,7 @@ public class OrderItemMapperImpl implements OrderItemMapper {
 
     @Override
     public OrderItem saveOrderItem(@Valid OrderItemDto orderItem) {
-
         OrderItem oItem = new OrderItem();
-
         oItem.setPrice(orderItem.getPrice());
         Product pod = productRepo.findById(orderItem.getProductId()).get();
         oItem.setProduct(pod);
@@ -36,22 +34,18 @@ public class OrderItemMapperImpl implements OrderItemMapper {
         oItem.setOrder(od);
         oItem.setCreatedDate(LocalDate.now());
         oItem.setQuantity(orderItem.getQuantity());
-
         return oItem;
     }
 
     @Override
     public OrderItemDto convertoDto(OrderItem od) {
-
         OrderItemDto oItem = new OrderItemDto();
-
         oItem.setId(od.getId());
         oItem.setCreatedDate(od.getCreatedDate());
         oItem.setOrderId(od.getOrder().getId());
         oItem.setPrice(od.getPrice());
         oItem.setProductId(od.getProduct().getId());
         oItem.setQuantity(od.getQuantity());
-
         return oItem;
     }
 

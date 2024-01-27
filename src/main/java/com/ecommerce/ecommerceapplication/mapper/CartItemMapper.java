@@ -9,6 +9,8 @@ public interface CartItemMapper {
 
     CartItemDto converToDto(CartItem savedcartItem);
 
+    CartItem updateCartItem(CartItemDto cartItemdto);
+
    
    
     

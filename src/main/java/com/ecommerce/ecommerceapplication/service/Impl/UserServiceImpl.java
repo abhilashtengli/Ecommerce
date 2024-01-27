@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveNewUser(User newUser) {
         return userRepo.save(newUser);
-
     }
 
     @Override
@@ -29,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user, int id) throws UserNotFoundException {
-
         Optional<User> userdb = userRepo.findById(id);
         if (userdb.isPresent()) {
             userRepo.save(user);

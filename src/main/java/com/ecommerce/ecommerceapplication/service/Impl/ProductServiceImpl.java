@@ -2,10 +2,8 @@ package com.ecommerce.ecommerceapplication.service.Impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ecommerce.ecommerceapplication.dao.ProductRepo;
 import com.ecommerce.ecommerceapplication.exceptionClass.ProductNotFoundException;
 import com.ecommerce.ecommerceapplication.model.Product;
@@ -19,7 +17,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product productToSave) {
-
         return productRepo.save(productToSave);
     }
 
@@ -41,14 +38,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(int productId, int quantity) {
-
         Product pd = productRepo.findById(productId).get();
         int totalQuantity = pd.getQuantity();
         if (totalQuantity != 0) {
             int revisedQuantity = totalQuantity - quantity;
             pd.setQuantity(revisedQuantity);
         }
-
     }
 
     @Override

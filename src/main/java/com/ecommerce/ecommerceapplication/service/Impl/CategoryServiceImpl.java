@@ -2,10 +2,8 @@ package com.ecommerce.ecommerceapplication.service.Impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ecommerce.ecommerceapplication.dao.CategoryRepo;
 import com.ecommerce.ecommerceapplication.exceptionClass.CategoryIdNotFoundException;
 import com.ecommerce.ecommerceapplication.model.Category;

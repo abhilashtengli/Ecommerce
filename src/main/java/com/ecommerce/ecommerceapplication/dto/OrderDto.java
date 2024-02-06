@@ -18,6 +18,9 @@ public class OrderDto {
 
     private LocalDate orderDate;
 
+    @NotNull(message = "Order failed due to payment failure")
+    private String transactionId;
+
     @NotNull(message = "user Id cannot be null")
     private int user;
 

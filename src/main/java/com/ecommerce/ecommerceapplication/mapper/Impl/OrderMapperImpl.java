@@ -25,6 +25,7 @@ public class OrderMapperImpl implements OrderMapper {
         order.setCreatedDate(LocalDate.now());
         User u = userRepo.findById(orderDto.getUser()).get();
         order.setUser(u);
+        order.setTransationId(orderDto.getTransactionId());
         return order;
     }
 

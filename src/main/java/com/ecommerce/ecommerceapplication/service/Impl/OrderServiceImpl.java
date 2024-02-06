@@ -3,8 +3,10 @@ package com.ecommerce.ecommerceapplication.service.Impl;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.ecommerce.ecommerceapplication.dao.CartItemRepo;
 import com.ecommerce.ecommerceapplication.dao.OrderItemRepo;
 import com.ecommerce.ecommerceapplication.dao.OrderRepo;
@@ -51,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCreatedDate(LocalDate.now());
         User user = userRepo.findById(userId).get();
         order.setUser(user);
+        order.setTransationId(od.getTransationId());
         AtomicInteger totalPriceAmount = new AtomicInteger(0);
 
         cartItems.forEach(items -> {

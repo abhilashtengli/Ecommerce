@@ -39,9 +39,11 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/api/v1/user/login", "/api/v1/user/save").permitAll()
-                                .requestMatchers("/api/v1/orderItem").hasRole("user")
-                                .requestMatchers("/api/v1/user/**").authenticated()
+                        auth -> auth
+                                .requestMatchers("/api/v1/user/login", "/api/v1/user/save", "/api/v1/products/getAll")
+                                .permitAll()
+                                // .requestMatchers("/api/v1/orderItem").hasRole("user")
+                                .requestMatchers("/api/v1/user/**", "/api/v1/orderItem/**").authenticated()
                                 .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
